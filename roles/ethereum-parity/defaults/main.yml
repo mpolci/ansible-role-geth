@@ -4,7 +4,6 @@ parity_group: parity
 parity_dst_bindir: /usr/bin
 parity_home: /var/lib/parity
 parity_disabled: false
-#parity_source: http://localhost:8080/ipfs/parity
-#parity_sum: sha256:1312a245f9e0cfd0922dac385f5ee8f6a1e16f30161e34f034a1588f4c8d3ec7
 parity_extra_args:
-#parity_extra_args: "--db-compaction hdd --nat none
+parity_deb_url: https://github.com/ethcore/parity/releases/download/v1.3.9/parity_1.3.9-0_amd64.deb
+parity_version_string: Parity/v1.3.9-beta/x86_64-linux-gnu/rustc1.12.1

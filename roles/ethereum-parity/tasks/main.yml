@@ -9,15 +9,26 @@
 #- name: copy parity bin file
 #  copy: src=files/parity dest={{ parity_dst_bindir }}/parity owner=root group=staff mode=0755
 
-- name: "install parity .deb package"
-  apt: deb=https://github.com/ethcore/parity/releases/download/v1.3.9/parity_1.3.9-0_amd64.deb
+- name: "check installed parity version"
+  shell: parity --version | grep -o -e 'Parity/v.*$'
+  register: parity_version
+  ignore_errors: yes
+  failed_when: false
+  changed_when: false
+  always_run: true
 
-- name: systemd parity service configuration file
+- set_fact: parity_installed={{ parity_version.stdout_lines[0] is defined and parity_version.stdout_lines[0] == parity_version_string }}
+
+- name: "install parity .deb package"
+  apt: deb={{ parity_deb_url }}
+  when: not parity_installed
+
+- name: "systemd parity service configuration file"
   template: src=templates/parity.service.j2 dest=/etc/systemd/system/parity.service owner=root group=root mode=0644
   notify:
     - reload systemd
 
 - meta: flush_handlers
 
-- name: service parity enabled
+- name: "service parity enabled"
   service: name=parity enabled=yes state=started
