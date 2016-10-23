@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Marco Polci
+  description: 
+  company:
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+    - name: Ubuntu
+      versions:
+        - wily
+        - xenial
+  categories:
+    - networking
+
+dependencies: []
+

@@ -1,0 +1,23 @@
+---
+
+- group: name={{ parity_group }} system=yes state=present
+- user: name={{ parity_user }} group={{ parity_group }} home={{ parity_home }} shell=/bin/false state=present
+
+#- name: download parity bin file
+#  get_url: url={{ parity_source }} dest={{ parity_dst_bindir }}/parity checksum={{ parity_sum }}
+
+#- name: copy parity bin file
+#  copy: src=files/parity dest={{ parity_dst_bindir }}/parity owner=root group=staff mode=0755
+
+- name: "install parity .deb package"
+  apt: deb=https://github.com/ethcore/parity/releases/download/v1.3.9/parity_1.3.9-0_amd64.deb
+
+- name: systemd parity service configuration file
+  template: src=templates/parity.service.j2 dest=/etc/systemd/system/parity.service owner=root group=root mode=0644
+  notify:
+    - reload systemd
+
+- meta: flush_handlers
+
+- name: service parity enabled
+  service: name=parity enabled=yes state=started

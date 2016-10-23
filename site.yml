@@ -1,0 +1,6 @@
+
+- name: Ethereum Pairty nodes
+  hosts: parity-nodes
+  remote_user: root
+  roles:
+    - ethereum-parity
