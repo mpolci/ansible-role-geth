@@ -1,0 +1,31 @@
+---
+- name: Check requirements
+  assert:
+    that:
+      - ansible_distribution == 'Ubuntu'
+
+- name: repositories
+  apt_repository: repo="{{ item }}"
+  tags: packages
+  with_items:
+    - ppa:ethereum/ethereum
+
+- name: packages
+  apt: name={{ item }} state=present
+  tags: packages
+  with_items:
+    - software-properties-common
+    - geth
+
+- group: name={{ geth_group }} system=yes state=present
+- user: name={{ geth_user }} group={{ geth_group }} home={{ geth_home }} shell=/bin/false state=present
+
+- name: "systemd geth service configuration file"
+  template: src=templates/geth.service.j2 dest=/etc/systemd/system/geth.service owner=root group=root mode=0644
+  notify:
+    - reload systemd
+
+- meta: flush_handlers
+
+- name: "service geth enabled"
+  service: name=geth enabled=yes state=started

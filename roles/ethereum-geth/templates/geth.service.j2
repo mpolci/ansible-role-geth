@@ -1,0 +1,20 @@
+[Unit]
+Description=Ethereum smart contracts network client daemon
+After=network.target
+
+[Service]
+User={{ geth_user }}
+Group={{ geth_group }}
+
+Type=simple
+ExecStart={{ geth_bindir }}/geth {{ geth_extra_args }}
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

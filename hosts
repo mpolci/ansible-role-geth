@@ -1,3 +1,6 @@
 
 [parity-nodes]
-parityhost1   ansible_host=172.16.88.143
+#parityhost1   ansible_host=192.168.1.103
+
+[geth-nodes]
+eth-host1   ansible_host=192.168.1.108

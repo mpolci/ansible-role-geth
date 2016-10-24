@@ -6,3 +6,11 @@
     - parity_extra_args: "--jsonrpc-interface all --jsonrpc-apis web3 --no-dapps"
   roles:
     - ethereum-parity
+
+- name: Go-Ethereum nodes
+  hosts: geth-nodes
+  remote_user: root
+  vars:
+    - geth_extra_args: "--cache 1024 --fast"
+  roles:
+    - ethereum-geth
