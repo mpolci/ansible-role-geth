@@ -3,6 +3,6 @@
   hosts: parity-nodes
   remote_user: root
   vars:
-    - extra_args: "--jsonrpc-interface all --jsonrpc-apis web3 --no-dapps"
+    - parity_extra_args: "--jsonrpc-interface all --jsonrpc-apis web3 --no-dapps"
   roles:
     - ethereum-parity
