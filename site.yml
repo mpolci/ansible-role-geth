@@ -11,6 +11,6 @@
   hosts: geth-nodes
   remote_user: root
   vars:
-    - geth_extra_args: "--cache 1024 --fast"
+    - geth_extra_args: "--cache 1024 --fast --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3"
   roles:
     - ethereum-geth
