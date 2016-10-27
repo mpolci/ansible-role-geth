@@ -1,9 +1,0 @@
----
-parity_user: parity
-parity_group: parity
-parity_dst_bindir: /usr/bin
-parity_home: /var/lib/parity
-parity_disabled: false
-parity_extra_args:
-parity_deb_url: https://github.com/ethcore/parity/releases/download/v1.3.9/parity_1.3.9-0_amd64.deb
-parity_version_string: Parity/v1.3.9-beta/x86_64-linux-gnu/rustc1.12.1
