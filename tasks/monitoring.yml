@@ -7,3 +7,12 @@
   notify:
     - restart nrpe
 
+- include_vars: vars/monitoring.yml
+
+- name: "Set nrpe checks for icinga2 template"
+  set_fact:
+    icinga2_template_nrpe_checks: "{{ ( icinga2_template_nrpe_checks | default([]) ) + nrpe_checks }}"
+
+- name: "Set tcp ports to check for icinga2 template"
+  set_fact:
+    icinga2_template_tcp_ports: "{{ ( icinga2_template_tcp_ports | default([]) ) + tcp_checks }}"

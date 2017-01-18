@@ -1,0 +1,8 @@
+---
+nrpe_checks:
+  - name: "{{ systemd_service_name }}"
+    nrpe_command: check_{{ systemd_service_name }}_service
+  - name: "Blockchain-Age"
+    nrpe_command: check_eth_node_sync
+
+tcp_checks: []
