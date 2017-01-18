@@ -1,0 +1,9 @@
+
+- name: "nagios check for eth blockchain"
+  npm: name="https://github.com/mpolci/nagios-eth-node-sync.git" global=yes
+
+- name: "nrpe config"
+  template: src=nrpe.j2 dest="/etc/nagios/nrpe.d/{{ systemd_service_name }}.cfg"
+  notify:
+    - restart nrpe
+
