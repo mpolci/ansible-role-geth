@@ -2,3 +2,5 @@
 - name: reload systemd
   command: systemctl daemon-reload
 
+- name: stop geth
+  service: name="{{ systemd_service_name }}" state=stopped
