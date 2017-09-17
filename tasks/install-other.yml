@@ -1,0 +1,46 @@
+---
+
+- name: "check installed geth version"
+  shell: "{{ geth_bindir }}/geth version | grep '^Version:' | sed -n -e 's/^Version: //p'"
+  register: geth_version
+  ignore_errors: yes
+  failed_when: false
+  changed_when: false
+  check_mode: no
+
+- set_fact: geth_installed={{ geth_version.stdout_lines[0] is defined and geth_version.stdout_lines[0] == geth_version_string }}
+
+- name: "download geth archive"
+  get_url:
+    url: "{{ geth_archive_url }}"
+    dest: /root/geth.tgz
+    checksum: "{{ geth_archive_sum }}"
+  register: downloaded
+  when: not geth_installed
+
+- name: "place binary file in /usr/bin"
+  when: downloaded is defined and downloaded.changed
+  block:
+    - name: "create unpack directory"
+      file: path="/tmp/geth" state=directory
+
+    - name: "unpack archive"
+      unarchive:
+        remote_src: true
+        src: /root/geth.tgz
+        dest: /tmp/geth
+
+    - name: "find binary"
+      shell: "find /tmp/geth -name geth -type f"
+      register: geth_bin_file
+
+    - name: "copy geth binary"
+      shell: cp {{ geth_bin_file.stdout_lines[0] }} {{ geth_bindir }}
+      notify:
+        - stop geth ignore error
+
+    - name: "delete unpack directory"
+      file: path="/tmp/geth" state=absent
+
+- name: "delete archive"
+  file: path="/root/geth.tgz" state=absent

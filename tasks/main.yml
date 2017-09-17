@@ -1,21 +1,11 @@
 ---
-- name: Check requirements
-  assert:
-    that:
-      - ansible_distribution == 'Ubuntu'
-
-- name: repositories
-  apt_repository: repo="{{ item }}"
+- include: install-ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
   tags: packages
-  with_items:
-    - ppa:ethereum/ethereum
 
-- name: packages
-  apt: name={{ item }} state=present
+- include: install-other.yml
+  when: ansible_distribution != 'Ubuntu'
   tags: packages
-  with_items:
-    - software-properties-common
-    - geth
 
 - group: name={{ geth_group }} system=yes state=present
 - user: name={{ geth_user }} group={{ geth_group }} home={{ geth_home }} shell=/bin/false state=present

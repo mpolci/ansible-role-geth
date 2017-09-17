@@ -4,3 +4,7 @@
 
 - name: stop geth
   service: name="{{ systemd_service_name }}" state=stopped
+
+- name: stop geth ignore error
+  service: name="{{ systemd_service_name }}" state=stopped
+  ignore_errors: yes
