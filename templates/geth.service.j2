@@ -11,10 +11,11 @@ ExecStart={{ geth_bindir }}/geth {{ geth_extra_args }}
 
 Restart=always
 PrivateTmp=true
-TimeoutStopSec=60s
-TimeoutStartSec=2s
-StartLimitInterval=120s
-StartLimitBurst=5
+TimeoutStopSec=90s
+TimeoutStartSec=10s
+RestartSec=10s
+StartLimitIntervalSec=4h
+StartLimitBurst=1440
 
 [Install]
 WantedBy=multi-user.target
