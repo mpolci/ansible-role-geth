@@ -1,7 +1,7 @@
 ---
-geth_archive_url: https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.0-6c6c7b2a.tar.gz
-geth_archive_sum: md5:9f40a6cd7f8f6de6b3cfd480847f7c38
-geth_version_string: 1.7.0-stable
+geth_archive_url: https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.7.3-4bb3c89d.tar.gz
+geth_archive_sum: md5:66e1fa9514b410a71273e56a9fe6a5ab
+geth_version_string: 1.7.3-stable
 geth_user: geth
 geth_group: geth
 geth_bindir: /usr/bin
