@@ -7,15 +7,15 @@ User={{ geth_user }}
 Group={{ geth_group }}
 
 Type=simple
-ExecStart={{ geth_bindir }}/geth {{ geth_extra_args }}
+ExecStart={{ geth_bindir }}/geth --config {{ geth_home }}/config.toml {{ geth_extra_args }}
 
 Restart=always
 PrivateTmp=true
 TimeoutStopSec=90s
 TimeoutStartSec=10s
-RestartSec=10s
-StartLimitIntervalSec=4h
-StartLimitBurst=1440
+RestartSec=15s
+StartLimitInterval=4h
+StartLimitBurst=500
 
 [Install]
 WantedBy=multi-user.target
