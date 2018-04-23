@@ -1,9 +1,9 @@
 ---
-- include_tasks: install-ubuntu.yml
+- import_tasks: install-ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
   tags: packages
 
-- include_tasks: install-other.yml
+- import_tasks: install-other.yml
   when: ansible_distribution != 'Ubuntu'
   tags: packages
 
@@ -32,6 +32,6 @@
   service: name={{ systemd_service_name }} enabled=yes state=started
 
 - name: "monitoring"
-  include_tasks: monitoring.yml
+  import_tasks: monitoring.yml
   when: icinga_server is defined
   tags: monitoring
