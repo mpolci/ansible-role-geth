@@ -8,3 +8,7 @@
 - name: stop geth ignore error
   service: name="{{ systemd_service_name }}" state=stopped
   ignore_errors: yes
+
+- name: restart nrpe
+  service: name=nagios-nrpe-server
+           state=restarted

@@ -10,3 +10,5 @@ geth_extra_args:
 geth_cache_size: "{{ [128, [1024, (ansible_memtotal_mb * 0.2 - 512) | int | abs] | min] | max }}"
 ethereum_blockchain_warning: 180
 ethereum_blockchain_critical: 600
+geth_sync_mode: fast
+geth_rpc_port: 8545

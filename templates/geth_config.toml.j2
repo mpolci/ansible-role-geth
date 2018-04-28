@@ -1,3 +1,7 @@
 [Eth]
-SyncMode = "fast"
+SyncMode = "{{ geth_sync_mode }}"
 DatabaseCache = {{ geth_cache_size }}
+
+[Node]
+HTTPPort = {{ geth_rpc_port }}
+HTTPHost = "127.0.0.1"
