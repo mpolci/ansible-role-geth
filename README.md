@@ -24,3 +24,9 @@ The log is sent to the journal, to show the log messages:
 ```bash
 journalctl --unit geth
 ```
+
+Uninstall
+---------
+
+In order to uninstall geth already installed from this role, you
+have to define the tag **uninstall** and the variable **uninstall_geth=true**

@@ -1,4 +1,8 @@
 ---
+- import_tasks: uninstall.yml
+  when: uninstall_geth is defined and uninstall_geth
+  tags: uninstall
+
 - import_tasks: install-ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
   tags: packages
