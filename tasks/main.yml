@@ -14,6 +14,14 @@
 - group: name={{ geth_group }} system=yes state=present
 - user: name={{ geth_user }} group={{ geth_group }} home={{ geth_home }} shell=/bin/false state=present
 
+- name: "geth home ownership"
+  file:
+    path: "{{ geth_home }}/"
+    owner: "{{ geth_user }}"
+    group: "{{ geth_group }}"
+    state: directory
+    recurse: yes
+
 - name: "geth configuration file"
   template:
     src: templates/geth_config.toml.j2
